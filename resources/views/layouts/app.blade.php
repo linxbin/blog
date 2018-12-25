@@ -73,40 +73,7 @@
         </nav>
 
         <main class="py-4">
-            <div class="container">
-                <div class="row justify-content-center">
-                    @yield('content')
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-header">个人信息</div>
-
-                            <img class="card-img-top" src="/avater.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <p> 姓名：linxb</p>
-                                <p> 身高：172</p>
-                                <p> 公司：厦门易玄雨科技</p>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">标签</div>
-                            <div class="card-body">
-                                <input type="button" value="PHP" class="btn btn-primary mb-1">
-                                <input type="button" value="Laravel" class="btn btn-primary mb-1">
-                                <input type="button" value="VUE" class="btn btn-primary mb-1">
-                                <input type="button" value="LINUX" class="btn btn-primary mb-1">
-                                <input type="button" value="XSHELL" class="btn btn-primary mb-1">
-                                <input type="button" value="HTML" class="btn btn-primary mb-1">
-                                <input type="button" value="THINKPHP" class="btn btn-primary mb-1">
-                                <input type="button" value="CENTOS" class="btn btn-primary mb-1">
-                                <input type="button" value="SWOOLE" class="btn btn-primary mb-1">
-                                <input type="button" value="Primary" class="btn btn-primary mb-1">
-                                <input type="button" value="Primary" class="btn btn-primary mb-1">
-                            </div>
-                        </div>
-                        @yield('tags')
-                    </div>
-                </div>
-            </div>
+            @yield('content')
         </main>
     </div>
 </body>
