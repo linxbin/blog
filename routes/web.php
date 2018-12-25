@@ -11,7 +11,7 @@
 |
 */
 
-Route::get( '/', 'IndexController@index' );
+Route::get( '/', 'ArticlesController@index' );
 
 \Illuminate\Support\Facades\Auth::routes();
 
