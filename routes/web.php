@@ -16,3 +16,9 @@ Route::get( '/', 'IndexController@index' );
 \Illuminate\Support\Facades\Auth::routes();
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
+
+Route::resource('articles','ArticlesController',['name' => [
+    'create' => 'articles.create',
+    'store' => 'articles.store',
+    'show' => 'articles.show',
+]]);
