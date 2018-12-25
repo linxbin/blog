@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Repositories\ArticlesRepository;
+use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+
+    protected $articlesRepositiry;
+
+    public function __construct(ArticlesRepository $articlesRepository)
+    {
+        $this->articlesRepositiry = $articlesRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +47,15 @@ class ArticlesController extends Controller
      */
     public function store( Request $request )
     {
-        //
+        $topics = $this->articlesRepositiry->normalizeTopic($request->get('topics'));
+        $data = [
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'user_id' => Auth::id(),
+        ];
+        $question = $this->questionsRepository->create($data);
+        $question->topics()->attach($topics);
+        return redirect()->route('questions.show', [$question->id]);
     }
 
     /**
@@ -48,7 +66,7 @@ class ArticlesController extends Controller
      */
     public function show( $id )
     {
-        $article = Article::where('id',$id)->first();
+        $article = $this->articlesRepositiry->byId($id);
         return view( 'articles.show', compact('article', $article));
     }
 
