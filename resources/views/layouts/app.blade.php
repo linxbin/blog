@@ -9,15 +9,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+    @include('vendor.ueditor.assets')
 </head>
 <body>
     <div id="app">
@@ -77,4 +75,6 @@
         </main>
     </div>
 </body>
+<script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
+@yield('js')
 </html>

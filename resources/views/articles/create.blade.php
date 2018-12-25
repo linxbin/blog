@@ -14,6 +14,10 @@
                                 <input type="text" name="title" class="form-control" value="" placeholder="标题" id="title"/>
                             </div>
                             <div class="form-group">
+                                <!-- 编辑器容器 -->
+                                <script id="container" name="body" type="text/plain">
+                                    {!! old('body') !!}
+                                </script>
                             </div>
                             <div class="form-group">
                                 <input type="hidden" class="form-control"/>
@@ -26,3 +30,24 @@
         </div>
     </div>
 @endsection
+@section('js')
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        ue = UE.getEditor('container', {
+            toolbars: [
+                ['bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'insertunorderedlist', 'insertorderedlist', 'justifyleft', 'justifycenter', 'justifyright', 'link', 'insertimage', 'fullscreen']
+            ],
+            elementPathEnabled: false,
+            enableContextMenu: false,
+            autoClearEmptyNode: true,
+            wordCount: false,
+            imagePopup: false,
+            autotypeset: {indent: true, imageBlockLine: 'center'}
+        });
+        ue.ready(function () {
+            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
+        });
+    </script>
+@endsection
+
+
