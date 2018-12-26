@@ -5,11 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="btn-group mb-4 " role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary active">全部</button>
+                    <a href="{{ route('articles.index') }}"><button type="button"  class="btn btn-secondary active">全部</button></a>
                     <button type="button" class="btn btn-secondary">按时间</button>
                     <button type="button" class="btn btn-secondary">按热度</button>
                 </div>
-                <div class="btn-group mb-4 float-right" role="group" aria-label="Basic example">
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <a href="{{route('articles.drafts')}}"><button type="button" class="btn btn-primary">草稿箱</button></a>
+                </div>
+                <div class="btn-group mr-2 float-right" role="group" aria-label="Basic example">
                     <a href="{{route('articles.create')}}"><button type="button" class="btn btn-success">写文章</button></a>
                 </div>
                 @foreach( $articles as $article )
@@ -21,10 +24,9 @@
                             </div>
                             <p class="mb-1">{{$article->body}}</p>
                             <small>
-                                <a href="/">Donec</a>
-                                <a href="/">id</a>
-                                <a href="/">elit</a>
-                                <a href="/">non mi porta</a>
+                                @foreach($article->topics as $topic)
+                                    <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
+                                @endforeach
                             </small>
                         </div>
                     </div>

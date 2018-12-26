@@ -49,4 +49,8 @@ class ArticlesRepository
         return Article::published()->latest('updated_at')->get();
     }
 
+    public function getArticlesHidden()
+    {
+        return Article::hidden()->latest('updated_at')->get();
+    }
 }

@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <!-- 编辑器容器 -->
-                                <script id="container" name="body" type="text/plain">
+                                <script id="container" class="uedit-height" name="body" type="text/plain">
                                     {!! $article->body !!}
                                 </script>
                                 <input type="hidden"
@@ -43,10 +43,26 @@
                                     </span>
                                 @endif
                             </div>
-                            <button class="btn btn-success right" type="submit">提交</button>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" checked type="radio" name="is_hidden" id="inlineRadio1" value="F">
+                                    <label class="form-check-label" for="inlineRadio1">发布</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="is_hidden" id="inlineRadio2" value="T">
+                                    <label class="form-check-label" for="inlineRadio2">保存</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success right" type="submit">提交</button>
+                            </div>
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
+                @include('layouts.userInfo')
+                @include('layouts.tags')
             </div>
         </div>
     </div>
@@ -63,6 +79,7 @@
             autoClearEmptyNode: true,
             wordCount: false,
             imagePopup: false,
+            initialFrameHeight : 400,
             autotypeset: {indent: true, imageBlockLine: 'center'}
         });
         ue.ready(function () {

@@ -34,7 +34,7 @@ class Article extends Model
 {
     use SoftDeletes;
     //
-    protected $fillable = ['title', 'body', 'pv', 'user_id'];
+    protected $fillable = ['title', 'body', 'pv', 'user_id', 'is_hidden'];
 
     protected $dates = ['deleted_at'];
 
@@ -45,11 +45,16 @@ class Article extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo( User::class );
     }
 
-    public function scopePublished($query)
+    public function scopePublished( $query )
     {
-        return $query->where('is_hidden','F');
+        return $query->where( 'is_hidden', 'F' );
+    }
+
+    public function scopeHidden( $query )
+    {
+        return $query->where( 'is_hidden', 'T' );
     }
 }

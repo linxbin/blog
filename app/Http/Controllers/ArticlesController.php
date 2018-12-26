@@ -51,9 +51,10 @@ class ArticlesController extends Controller
     {
         $topics  = $this->articlesRepository->normalizeTopic( $request->get( 'topics' ) );
         $data    = [
-            'title'   => $request->get( 'title' ),
-            'body'    => $request->get( 'body' ),
-            'user_id' => Auth::id(),
+            'title'     => $request->get( 'title' ),
+            'body'      => $request->get( 'body' ),
+            'is_hidden' => $request->get( 'is_hidden' ),
+            'user_id'   => Auth::id(),
         ];
         $article = $this->articlesRepository->create( $data );
         $article->topics()->attach( $topics );
@@ -96,14 +97,13 @@ class ArticlesController extends Controller
     {
         $article = $this->articlesRepository->byId( $id );
         $topics  = $this->articlesRepository->normalizeTopic( $request->get( 'topics' ) );
-
         $article->update( [
-            'title' => $request->title,
-            'body'  => $request->body,
+            'title'     => $request->title,
+            'body'      => $request->body,
+            'is_hidden' => $request->get( 'is_hidden' ),
         ] );
-
         $article->topics()->sync( $topics );
-        return redirect()->route( 'articles.show', [$article->id] );
+        return redirect()->route( 'articles.show', $article->id );
     }
 
     /**
@@ -114,7 +114,30 @@ class ArticlesController extends Controller
      */
     public function destroy( $id )
     {
+        if ( !Auth::user()->owns( $this->articlesRepository->byId( $id ) ) ) {
+            return redirect()->route( 'articles.show', $id );
+        }
         $this->articlesRepository->delete( $id );
-        return redirect()->route( 'articles.index',['articles' => $articles]);
+        $articles = $this->articlesRepository->getArticlesFeed();
+        return redirect()->route( 'articles.index', ['articles' => $articles] );
+    }
+
+    public function hidden( $id )
+    {
+        $article = $this->articlesRepository->byId( $id );
+        if ( !Auth::user()->owns( $article ) ) {
+            return redirect()->route( 'articles.show', $id );
+        }
+        $article->update( [
+            'is_hidden' => 'T',
+        ] );
+        $articles = $this->articlesRepository->getArticlesFeed();
+        return redirect()->route( 'articles.index', ['articles' => $articles] );
+    }
+
+    public function drafts()
+    {
+        $articles = $this->articlesRepository->getArticlesHidden();
+        return view( 'articles.index', ['articles' => $articles] );
     }
 }

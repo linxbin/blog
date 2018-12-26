@@ -7,11 +7,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{$article->title}}</h5>
-                        <p class="card-text">{{$article->body}}</p>
+                        <p class="card-text">{!! $article->body !!}</p>
                     </div>
                     <div class="actions">
                         @if(Auth::check() && Auth::user()->owns($article))
-                            <span class="edit"><a href="{{route('articles.edit', $article->id)}}">编辑</a></span>
+                            <span class="edit m-2"><a href="{{route('articles.edit', $article->id)}}">编辑</a></span>
+                        @endif
+                        @if(Auth::check() && Auth::user()->owns($article))
+                            <span class="edit m-2"><a href="{{route('articles.hidden', $article->id)}}">隐藏</a></span>
+                        @endif
+                        @if(Auth::check() && Auth::user()->owns($article))
+                            <span class="edit m-2"><a href="{{route('articles.destroy', $article->id)}}">删除</a></span>
                         @endif
                     </div>
                 </div>

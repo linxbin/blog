@@ -7,11 +7,18 @@
                 <div class="card">
                     <div class="card-header">发布文章</div>
                     <div class="card-body">
-                        <form action="{{route('articles.store')}}" method="post">
+                        <form action="{{ route('articles.store' ) }}" method="post">
                             {!! csrf_field() !!}
                             <div class="form-group">
                                 <label for="title">标题</label>
-                                <input type="text" name="title" class="form-control" value="" placeholder="标题" id="title"/>
+                                <input type="text" name="title"
+                                       class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"
+                                       value="{{ old('title') }}" placeholder="标题" id="title"/>
+                                @if ($errors->has('title'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <select class="js-example-placeholder-multiple js-data-example-ajax form-control" name="topics[]"
@@ -23,14 +30,34 @@
                                 <script id="container" name="body" type="text/plain">
                                     {!! old('body') !!}
                                 </script>
+                                <input type="hidden"
+                                       class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"/>
+                                @if ($errors->has('body'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('body') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <input type="hidden" class="form-control"/>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" checked type="radio" name="is_hidden" id="inlineRadio1" value="F">
+                                    <label class="form-check-label" for="inlineRadio1">发布</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="is_hidden" id="inlineRadio2" value="T">
+                                    <label class="form-check-label" for="inlineRadio2">保存</label>
+                                </div>
                             </div>
-                            <button class="btn btn-success right" type="submit">发布问题</button>
+                            <div class="form-group">
+                                <button class="btn btn-success right" type="submit">提交</button>
+                            </div>
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
+                @include('layouts.userInfo')
+                @include('layouts.tags')
             </div>
         </div>
     </div>
@@ -47,6 +74,7 @@
             autoClearEmptyNode: true,
             wordCount: false,
             imagePopup: false,
+            initialFrameHeight : 400,
             autotypeset: {indent: true, imageBlockLine: 'center'}
         });
         ue.ready(function () {
