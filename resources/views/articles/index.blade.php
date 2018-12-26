@@ -29,7 +29,7 @@
                             <div class="d-flex w-100 justify-content-between">
                                 <a href="{{route('articles.show',$article->id)}}"><h5
                                             class="mb-1">{{$article->title}}</h5></a>
-                                <small>3 days ago</small>
+                                <small>{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
                             </div>
                             <div class="mb-2 mt-2">{!! str_limit($article->body,$limit = 255, $end = '...') !!}</div>
                             <small>

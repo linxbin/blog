@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "nesbot/carbon": "^1.36.1",
         "overtrue/laravel-ueditor": "~1.0"
     },
     "require-dev": {

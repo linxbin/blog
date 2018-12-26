@@ -7,6 +7,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{$article->title}}</h5>
+                        <div class="mt-3 mb-3">
+                            <small class="text-muted mr-4">作者：Linxb</small>
+                            <small class="text-muted">创建于：{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
+                        </div>
+
                         <p class="card-text">{!! $article->body !!}</p>
                     </div>
                     <div class="actions">
