@@ -9,6 +9,11 @@
                         <h5 class="card-title">{{$article->title}}</h5>
                         <p class="card-text">{{$article->body}}</p>
                     </div>
+                    <div class="actions">
+                        @if(Auth::check() && Auth::user()->owns($article))
+                            <span class="edit"><a href="{{route('articles.edit', $article->id)}}">编辑</a></span>
+                        @endif
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">

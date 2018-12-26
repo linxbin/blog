@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticlesTopicsTable extends Migration
+class AlterArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateArticlesTopicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_topic', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('articles_id')->unsigned()->index();
-            $table->integer('topics_id')->unsigned()->index();
-            $table->timestamps();
+        Schema::table('articles', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +25,9 @@ class CreateArticlesTopicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_topic');
+        //
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 }

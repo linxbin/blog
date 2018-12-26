@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get( '/topics', function ( Request $request ) {
+    $topics = \App\Topic::select( ['name', 'id'] )->where( 'name', 'like', '%'.$request->query( 'q' ).'%' )->get();
+    return $topics;
+} );
