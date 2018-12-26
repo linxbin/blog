@@ -46,11 +46,11 @@ class ArticlesRepository
 
     public function getArticlesFeed()
     {
-        return Article::published()->latest('updated_at')->get();
+        return Article::published()->latest('updated_at')->paginate();
     }
 
     public function getArticlesHidden()
     {
-        return Article::hidden()->latest('updated_at')->get();
+        return Article::hidden()->latest('updated_at')->paginate();
     }
 }

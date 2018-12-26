@@ -5,24 +5,33 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="btn-group mb-4 " role="group" aria-label="Basic example">
-                    <a href="{{ route('articles.index') }}"><button type="button"  class="btn btn-secondary active">全部</button></a>
+                    <a href="{{ route('articles.index') }}">
+                        <button type="button" class="btn btn-secondary active">全部</button>
+                    </a>
                     <button type="button" class="btn btn-secondary">按时间</button>
                     <button type="button" class="btn btn-secondary">按热度</button>
                 </div>
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-                    <a href="{{route('articles.drafts')}}"><button type="button" class="btn btn-primary">草稿箱</button></a>
-                </div>
-                <div class="btn-group mr-2 float-right" role="group" aria-label="Basic example">
-                    <a href="{{route('articles.create')}}"><button type="button" class="btn btn-success">写文章</button></a>
-                </div>
+                @if(Auth::check())
+                    <div class="btn-group float-right" role="group" aria-label="Basic example">
+                        <a href="{{route('articles.drafts')}}">
+                            <button type="button" class="btn btn-primary">草稿箱</button>
+                        </a>
+                    </div>
+                    <div class="btn-group mr-2 float-right" role="group" aria-label="Basic example">
+                        <a href="{{route('articles.create')}}">
+                            <button type="button" class="btn btn-success">写文章</button>
+                        </a>
+                    </div>
+                @endif
                 @foreach( $articles as $article )
                     <div class="list-group mb-4">
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <a href="{{route('articles.show',$article->id)}}"><h5 class="mb-1">{{$article->title}}</h5></a>
+                                <a href="{{route('articles.show',$article->id)}}"><h5
+                                            class="mb-1">{{$article->title}}</h5></a>
                                 <small>3 days ago</small>
                             </div>
-                            <p class="mb-1">{{$article->body}}</p>
+                            <div class="mb-2 mt-2">{!! str_limit($article->body,$limit = 255, $end = '...') !!}</div>
                             <small>
                                 @foreach($article->topics as $topic)
                                     <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
@@ -33,11 +42,7 @@
                 @endforeach
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">上一页</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+                        {{ $articles->links() }}
                     </ul>
                 </nav>
             </div>

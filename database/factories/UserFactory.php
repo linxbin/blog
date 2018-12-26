@@ -26,9 +26,16 @@ $factory->define( App\User::class, function ( Faker $faker ) {
 $factory->define( App\Article::class, function ( Faker $faker ) {
     return [
         'title'     => $faker->title,
-        'user_id'   => random_int( 1, 10 ),
+        'user_id'   => 1,
         'body'      => $faker->text,
         'pv'        => random_int( 1, 100 ),
         'is_hidden' => 'T',
+    ];
+} );
+
+$factory->define( App\Topic::class, function ( Faker $faker ) {
+    return [
+        'name'           => $faker->name,
+        'articles_count' => 0,
     ];
 } );
