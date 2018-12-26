@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Repositories\ArticlesRepository;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
 
 class ArticlesController extends Controller
 {
@@ -69,7 +67,7 @@ class ArticlesController extends Controller
      */
     public function show( $id )
     {
-        $article = $this->articlesRepository->byId( $id );
+        $article = $this->articlesRepository->byIdWithTopicsAndUser( $id );
         return view( 'articles.show', compact( 'article', $article ) );
     }
 
@@ -82,7 +80,7 @@ class ArticlesController extends Controller
     public function edit( $id )
     {
         //
-        $article = $this->articlesRepository->byIdWithTopics( $id );
+        $article = $this->articlesRepository->byIdWithTopicsAndUser( $id );
         return view( 'articles.edit', compact( 'article', $article ) );
     }
 
@@ -95,7 +93,7 @@ class ArticlesController extends Controller
      */
     public function update( StoreArticleRequest $request, $id )
     {
-        $article = $this->articlesRepository->byId( $id );
+        $article = $this->articlesRepository->byIdWithTopicsAndUser( $id );
         $topics  = $this->articlesRepository->normalizeTopic( $request->get( 'topics' ) );
         $article->update( [
             'title'     => $request->title,
@@ -124,7 +122,7 @@ class ArticlesController extends Controller
 
     public function hidden( $id )
     {
-        $article = $this->articlesRepository->byId( $id );
+        $article = $this->articlesRepository->byIdWithTopicsAndUser( $id );
         if ( !Auth::user()->owns( $article ) ) {
             return redirect()->route( 'articles.show', $id );
         }

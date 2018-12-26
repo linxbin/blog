@@ -8,11 +8,16 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$article->title}}</h5>
                         <div class="mt-3 mb-3">
-                            <small class="text-muted mr-4">作者：Linxb</small>
+                            <small class="text-muted mr-4">作者：{{ $article->user->name }}</small>
                             <small class="text-muted">创建于：{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
                         </div>
 
                         <p class="card-text">{!! $article->body !!}</p>
+                        <small>
+                            @foreach($article->topics as $topic)
+                                <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
+                            @endforeach
+                        </small>
                     </div>
                     <div class="actions">
                         @if(Auth::check() && Auth::user()->owns($article))

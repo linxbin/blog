@@ -15,7 +15,7 @@ class ArticlesRepository
 {
     public function byId( $id )
     {
-        return Article::where( 'id', $id )->with( 'topics' )->first();
+        return Article::where( 'id', $id )->first();
     }
 
     public function normalizeTopic( array $topics )
@@ -34,9 +34,9 @@ class ArticlesRepository
         return Article::create( $attributes );
     }
 
-    public function byIdWithTopics( $id )
+    public function byIdWithTopicsAndUser( $id )
     {
-        return Article::where( 'id', $id )->with( 'topics' )->first();
+        return Article::where( 'id', $id )->with( 'topics' )->with('user')->first();
     }
 
     public function delete( $id )
