@@ -13,6 +13,7 @@ try {
 
     require('bootstrap');
     require('./select2.min');
+    window.Simplemde = require('simplemde');
 } catch (e) {}
 
 /**

@@ -31,10 +31,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <!-- 编辑器容器 -->
-                                <script id="container" class="uedit-height" name="body" type="text/plain">
+                                {{-- simplemde 容器 --}}
+                                <textarea id="container" name="body" placeholder="">
                                     {!! $article->body !!}
-                                </script>
+                                </textarea>
                                 <input type="hidden"
                                        class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"/>
                                 @if ($errors->has('body'))
@@ -70,21 +70,6 @@
 @section('js')
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
-        ue = UE.getEditor('container', {
-            toolbars: [
-                ['bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'insertunorderedlist', 'insertorderedlist', 'justifyleft', 'justifycenter', 'justifyright', 'link', 'insertimage', 'fullscreen']
-            ],
-            elementPathEnabled: false,
-            enableContextMenu: false,
-            autoClearEmptyNode: true,
-            wordCount: false,
-            imagePopup: false,
-            initialFrameHeight : 400,
-            autotypeset: {indent: true, imageBlockLine: 'center'}
-        });
-        ue.ready(function () {
-            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
-        });
         $(document).ready(function () {
             function formatTopic(topic) {
                 return "<div class='select2-result-repository clearfix'>" +
@@ -124,6 +109,9 @@
                     return markup;
                 }
             });
+        });
+        var simplemde = new Simplemde({
+            element: document.getElementById("container"),
         });
     </script>
 @endsection

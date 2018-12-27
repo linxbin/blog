@@ -21,15 +21,16 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <select class="js-example-placeholder-multiple js-data-example-ajax form-control" name="topics[]"
+                                <select class="js-example-placeholder-multiple js-data-example-ajax form-control"
+                                        name="topics[]"
                                         multiple="multiple">
                                 </select>
                             </div>
                             <div class="form-group">
-                                <!-- 编辑器容器 -->
-                                <script id="container" name="body" type="text/plain">
+                                {{-- simplemde 容器 --}}
+                                <textarea id="container" placeholder="">
                                     {!! old('body') !!}
-                                </script>
+                                </textarea>
                                 <input type="hidden"
                                        class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"/>
                                 @if ($errors->has('body'))
@@ -40,11 +41,13 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" checked type="radio" name="is_hidden" id="inlineRadio1" value="F">
+                                    <input class="form-check-input" checked type="radio" name="is_hidden"
+                                           id="inlineRadio1" value="F">
                                     <label class="form-check-label" for="inlineRadio1">发布</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="is_hidden" id="inlineRadio2" value="T">
+                                    <input class="form-check-input" type="radio" name="is_hidden" id="inlineRadio2"
+                                           value="T">
                                     <label class="form-check-label" for="inlineRadio2">保存</label>
                                 </div>
                             </div>
@@ -65,21 +68,6 @@
 @section('js')
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
-        ue = UE.getEditor('container', {
-            toolbars: [
-                ['bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'insertunorderedlist', 'insertorderedlist', 'justifyleft', 'justifycenter', 'justifyright', 'link', 'insertimage', 'fullscreen']
-            ],
-            elementPathEnabled: false,
-            enableContextMenu: false,
-            autoClearEmptyNode: true,
-            wordCount: false,
-            imagePopup: false,
-            initialFrameHeight : 400,
-            autotypeset: {indent: true, imageBlockLine: 'center'}
-        });
-        ue.ready(function () {
-            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
-        });
         $(document).ready(function () {
             function formatTopic(topic) {
                 return "<div class='select2-result-repository clearfix'>" +
@@ -88,9 +76,11 @@
                 topic.name ? topic.name : "Laravel" +
                     "</div></div></div>";
             }
+
             function formatTopicSelection(topic) {
                 return topic.name || topic.text;
             }
+
             $(".js-example-placeholder-multiple").select2({
                 tags: true,
                 placeholder: '选择相关话题',
@@ -117,6 +107,9 @@
                     return markup;
                 }
             });
+        });
+        var simplemde = new Simplemde({
+            element: document.getElementById("container"),
         });
     </script>
 @endsection
