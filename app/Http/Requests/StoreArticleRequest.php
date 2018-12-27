@@ -22,7 +22,7 @@ class StoreArticleRequest extends FormRequest
             'title.required'  => '标题不能为空',
             'title.min'       => '标题不能少于6个字符',
             'title.max'       => '标题不能多于196个字符',
-            'body.max'        => '内容不能为空',
+            'body.required'   => '内容不能为空',
             'body.min'        => '内容不能少于26个字符',
             'topics.required' => '标签不能为空',
         ];

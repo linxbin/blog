@@ -26,13 +26,15 @@
                 @foreach( $articles as $article )
                     <div class="list-group mb-4">
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
+                            <div class="d-flex w-100 justify-content-between mb-2">
                                 <a href="{{route('articles.show',$article->id)}}"><h5
                                             class="mb-1">{{$article->title}}</h5></a>
                                 <small>{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
                             </div>
-                            <small>作者： {{ $article->user->name }}</small>
-                            <div class="mb-2 mt-2">{!! str_limit($article->body['html'],$limit = 100, $end = '...') !!}</div>
+                            <p>
+                                <small class="mr-2">作者： {{ $article->user->name }}</small>
+                                <small>浏览： {{ $article->pv }}</small>
+                            </p>
                             <small>
                                 @foreach($article->topics as $topic)
                                     <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
