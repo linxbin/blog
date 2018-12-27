@@ -11,8 +11,9 @@
                             <small class="text-muted mr-4">作者：{{ $article->user->name }}</small>
                             <small class="text-muted">创建于：{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
                         </div>
-
-                        <p class="card-text">{!! $article->body['html'] !!}</p>
+                        <div class="markdown">
+                            <p class="card-text">{!! $article->body['html'] !!}</p>
+                        </div>
                         <small>
                             @foreach($article->topics as $topic)
                                 <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
