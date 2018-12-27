@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 {{-- simplemde 容器 --}}
                                 <textarea id="container" name="body" placeholder="">
-                                    {!! $article->body !!}
+                                    {!! $article->body['raw'] !!}
                                 </textarea>
                                 <input type="hidden"
                                        class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"/>

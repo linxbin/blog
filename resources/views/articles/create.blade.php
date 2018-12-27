@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 {{-- simplemde 容器 --}}
-                                <textarea id="container" placeholder="">
+                                <textarea id="container" name="body" placeholder="">
                                     {!! old('body') !!}
                                 </textarea>
                                 <input type="hidden"

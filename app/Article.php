@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Tools\Markdowner;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -38,9 +39,23 @@ class Article extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $casts = [
+        'body' => 'array',
+    ];
+
     public function topics()
     {
         return $this->belongsToMany( Topic::class )->withTimestamps();
+    }
+
+    public function setBodyAttribute($value)
+    {
+        $data = [
+            'raw' => $value,
+            'html' => (new Markdowner())->convertMarkdownToHtml($value),
+        ];
+
+        $this->attributes['body'] = json_encode($data);
     }
 
     public function user()

@@ -12,7 +12,7 @@
                             <small class="text-muted">创建于：{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
                         </div>
 
-                        <p class="card-text">{!! $article->body !!}</p>
+                        <p class="card-text">{!! $article->body['html'] !!}</p>
                         <small>
                             @foreach($article->topics as $topic)
                                 <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>

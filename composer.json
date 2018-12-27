@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "league/html-to-markdown": "^4.8",
         "nesbot/carbon": "^1.36.1",
         "overtrue/laravel-ueditor": "~1.0"
     },

@@ -32,7 +32,7 @@
                                 <small>{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
                             </div>
                             <small>作者： {{ $article->user->name }}</small>
-                            <div class="mb-2 mt-2">{!! str_limit($article->body,$limit = 255, $end = '...') !!}</div>
+                            <div class="mb-2 mt-2">{!! str_limit($article->body['html'],$limit = 100, $end = '...') !!}</div>
                             <small>
                                 @foreach($article->topics as $topic)
                                     <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
