@@ -68,7 +68,7 @@ class ArticlesController extends Controller
     public function show( $id )
     {
         $article = $this->articlesRepository->byIdWithTopicsAndUser( $id );
-        $article->increment( 'pv');
+        $article->increment( 'pv' );
         return view( 'articles.show', compact( 'article', $article ) );
     }
 
@@ -149,6 +149,16 @@ class ArticlesController extends Controller
     public function hottest()
     {
         $articles = $this->articlesRepository->getArticleHottestFeed();
+        return view( 'articles.index', ['articles' => $articles] );
+    }
+
+    /**
+     * @param $topicId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function topic( $topicId )
+    {
+        $articles = $this->articlesRepository->ByTopicId( $topicId );
         return view( 'articles.index', ['articles' => $articles] );
     }
 }

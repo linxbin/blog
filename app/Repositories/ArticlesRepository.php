@@ -59,6 +59,13 @@ class ArticlesRepository
         return Article::published()->orderBy('pv','desc')->paginate();
     }
 
+    public function ByTopicId($topicId)
+    {
+        return Article::whereHas('topics',function ($query) use ($topicId){
+            $query->where('topic_id', $topicId);
+        })->published()->latest('updated_at')->paginate();
+    }
+
 
     public function getArticlesHidden()
     {

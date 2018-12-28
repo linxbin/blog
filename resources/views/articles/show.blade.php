@@ -17,7 +17,7 @@
                         </div>
                         <small>
                             @foreach($article->topics as $topic)
-                                <a href="topic/{{$topic->id}}" class="topic"> {{$topic->name}} </a>
+                                <a href="{{ route('articles.topic',$topic->id) }}" class="topic"> {{$topic->name}} </a>
                             @endforeach
                         </small>
                     </div>
@@ -33,10 +33,6 @@
                         @endif
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                @include('layouts.userInfo')
-                @include('layouts.tags')
             </div>
         </div>
     </div>

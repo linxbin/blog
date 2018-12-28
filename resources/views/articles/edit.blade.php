@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 {{-- simplemde 容器 --}}
-                                <textarea id="container" name="body" placeholder="">{!! $article->body['raw'] !!}</textarea>
+                                <textarea id="container" name="body" placeholder="">@if(old('body')){!! old('body') !!}@else{!! $article->body['raw'] !!}@endif</textarea>
                                 <input type="hidden"
                                        class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"/>
                                 @if ($errors->has('body'))
@@ -58,10 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                @include('layouts.userInfo')
-                @include('layouts.tags')
-            </div>
+
         </div>
     </div>
 @endsection
