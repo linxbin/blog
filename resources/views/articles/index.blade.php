@@ -63,6 +63,10 @@
                     </ul>
                 </nav>
             </div>
+            <div class="col-md-4">
+                @include('layouts.userInfo')
+                @include('layouts.tags')
+            </div>
         </div>
     </div>
 @endsection

@@ -3,10 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{$article->title}}</h5>
+                        <h3 class="card-title">{{$article->title}}</h3>
                         <div class="mt-3 mb-3">
                             <small class="text-muted mr-4">作者：{{ $article->user->name }}</small>
                             <small class="text-muted mr-4">创建于：{{ \Carbon\Carbon::parse($article->created_at)->diffForHumans() }}</small>
