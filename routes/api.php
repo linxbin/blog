@@ -22,4 +22,4 @@ Route::get( '/topics', function ( Request $request ) {
     return $topics;
 } );
 
-Route::post('/uploads/image', 'UploadsController@fileUpload')->name('uploads.image');
+Route::middleware('auth:api')->post('/uploads/image', 'UploadsController@fileUpload')->name('uploads.image');

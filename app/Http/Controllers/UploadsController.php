@@ -10,6 +10,8 @@ class UploadsController extends Controller
     //
     public function fileUpload( ImageRequest $request )
     {
+
+
         $strategy = $request->get( 'strategy', 'images' );
         if ( !$request->hasFile( 'file' ) ) {
             return response()->json( [

@@ -186,6 +186,9 @@
                 xhrFields: {
                     withCredentials: true
                 },
+                headers: {
+                    Authorization : apiToken.content
+                },
                 success: function (data) {
                     console.log(data);
                     console.log($('#container').text())

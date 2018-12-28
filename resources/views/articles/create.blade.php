@@ -69,6 +69,7 @@
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         $(document).ready(function () {
+            console.log(apiToken.content);
             function formatTopic(topic) {
                 return "<div class='select2-result-repository clearfix'>" +
                 "<div class='select2-result-repository__meta'>" +
@@ -160,7 +161,7 @@
                 }
                 let formData = new FormData();
                 formData.append('file', dataList[i].getAsFile());
-                formData.append('_token', "{{ csrf_token() }}");
+                formData.append('_token', "{{ Auth::user()->api_token }}");
                 fileUpload(formData, editor);
 
             }
@@ -184,6 +185,9 @@
                 contentType: false,
                 xhrFields: {
                     withCredentials: true
+                },
+                headers: {
+                    Authorization : apiToken.content
                 },
                 success: function (data) {
                     console.log(data);
