@@ -36,7 +36,7 @@ class ArticlesRepository
 
     public function byIdWithTopicsAndUser( $id )
     {
-        return Article::where( 'id', $id )->with( 'topics' )->with('user')->first();
+        return Article::where( 'id', $id )->with( 'topics' )->with( 'user' )->first();
     }
 
     public function delete( $id )
@@ -49,8 +49,19 @@ class ArticlesRepository
         return Article::published()->latest('updated_at')->paginate();
     }
 
+    public function getArticleNewestFeed()
+    {
+        return Article::published()->orderBy('created_at','desc')->paginate();
+    }
+
+    public function getArticleHottestFeed()
+    {
+        return Article::published()->orderBy('pv','desc')->paginate();
+    }
+
+
     public function getArticlesHidden()
     {
-        return Article::hidden()->latest('updated_at')->paginate();
+        return Article::hidden()->latest( 'updated_at' )->paginate();
     }
 }

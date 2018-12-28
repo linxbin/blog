@@ -36,3 +36,5 @@ Route::post('/articles','ArticlesController@store')->name('articles.store');
 Route::get('/articles/{id}/destroy','ArticlesController@destroy')->name('articles.destroy');
 Route::get('/articles/{id}/hidden','ArticlesController@hidden')->name('articles.hidden');
 Route::get('/articles/drafts','ArticlesController@drafts')->name('articles.drafts');
+Route::get('/articles/newest','ArticlesController@newest')->name('articles.newest');
+Route::get('/articles/hottest','ArticlesController@hottest')->name('articles.hottest');

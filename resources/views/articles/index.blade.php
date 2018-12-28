@@ -6,10 +6,24 @@
             <div class="col-md-8">
                 <div class="btn-group mb-4 " role="group" aria-label="Basic example">
                     <a href="{{ route('articles.index') }}">
-                        <button type="button" class="btn btn-secondary active">全部</button>
+                        <button type="button"
+                                class="btn btn-secondary right-angle @if(Route::currentRouteName() == 'articles.index') active @endif">
+                            全部
+                        </button>
                     </a>
-                    <button type="button" class="btn btn-secondary">按时间</button>
-                    <button type="button" class="btn btn-secondary">按热度</button>
+                    <a href="{{ route('articles.newest') }}">
+                        <button type="button"
+                                class="btn btn-secondary right-angle @if(Route::currentRouteName() == 'articles.newest') active @endif">
+                            按时间
+                        </button>
+                    </a>
+                    <a href="{{ route('articles.hottest') }}">
+                        <button type="button"
+                                class="btn btn-secondary right-angle @if(Route::currentRouteName() == 'articles.hottest') active @endif">
+                            按热度
+                        </button>
+                    </a>
+
                 </div>
                 @if(Auth::check())
                     <div class="btn-group float-right" role="group" aria-label="Basic example">

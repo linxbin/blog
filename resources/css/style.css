@@ -87,3 +87,7 @@ a.topic:hover {
 .avatar{
     margin: 10px;
 }
+
+.right-angle {
+    border-radius: 0 !important;
+}

@@ -730,6 +730,10 @@ a.topic:hover {
   margin: 10px;
 }
 
+.right-angle {
+  border-radius: 0 !important;
+}
+
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
