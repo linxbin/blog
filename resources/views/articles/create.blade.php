@@ -192,7 +192,7 @@
                 success: function (data) {
                     console.log(data);
                     console.log($('#container').text())
-                    simplemde.value('![]({{config('app.url')}}'+data+')');
+                    simplemde.codemirror. replaceSelection('![]({{config('app.url')}}'+data+')');
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     console.log("上传出错了")
