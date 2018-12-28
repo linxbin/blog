@@ -68,6 +68,7 @@ class ArticlesController extends Controller
     public function show( $id )
     {
         $article = $this->articlesRepository->byIdWithTopicsAndUser( $id );
+        $article->increment('pv',1);
         return view( 'articles.show', compact( 'article', $article ) );
     }
 

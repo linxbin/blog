@@ -32,9 +32,7 @@
                             </div>
                             <div class="form-group">
                                 {{-- simplemde 容器 --}}
-                                <textarea id="container" name="body" placeholder="">
-                                    {!! $article->body['raw'] !!}
-                                </textarea>
+                                <textarea id="container" name="body" placeholder="">{!! $article->body['raw'] !!}</textarea>
                                 <input type="hidden"
                                        class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"/>
                                 @if ($errors->has('body'))
@@ -110,8 +108,93 @@
                 }
             });
         });
-        var simplemde = new Simplemde({
+
+        /**
+         * 加载simplemde编辑器
+         */
+        let simplemde = new Simplemde({
             element: document.getElementById("container"),
         });
+
+        /**
+         * 监听拖曳图片上传动作
+         */
+        simplemde.codemirror.on('drop', function (editor, e) {
+            if (!(e.dataTransfer && e.dataTransfer.files)) {
+                _this.$message({
+                    message: "该浏览器不支持操作",
+                    type: 'error'
+                });
+                return
+            }
+            let dataList = e.dataTransfer.files;
+            for (let i = 0; i < dataList.length; i++) {
+                if (dataList[i].type.indexOf('image') === -1) {
+                    _this.$message({
+                        message: "仅支持Image上传",
+                        type: 'error'
+                    });
+                    continue
+                }
+                let formData = new FormData();
+                formData.append('file', dataList[i]);
+                formData.append('_token', "{{ csrf_token() }}");
+                fileUpload(formData);
+            }
+        });
+
+        /**
+         * 监听粘贴图片上传动作
+         **/
+        simplemde.codemirror.on('paste', function (editor, e) {
+            console.log("codemirror on paste");
+
+            if(!(e.clipboardData&&e.clipboardData.items)){
+                alert("该浏览器不支持操作");
+                return;
+            }
+            let dataList = e.clipboardData.items;
+            for (let i = 0; i < dataList.length; i++) {
+                if (dataList[i].type.indexOf('image') === -1) {
+
+                    continue
+                }
+                let formData = new FormData();
+                formData.append('file', dataList[i].getAsFile());
+                formData.append('_token', "{{ csrf_token() }}");
+                fileUpload(formData, editor);
+
+            }
+        });
+
+        /**
+         * 图片上传ajax
+         * @param formData
+         */
+        function fileUpload(formData) {
+            $.ajax({
+                url: '{{route('uploads.image')}}',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                timeout: 5000,
+                //必须false才会避开jQuery对 formdata 的默认处理
+                // XMLHttpRequest会对 formdata 进行正确的处理
+                processData: false,
+                //必须false才会自动加上正确的Content-Type
+                contentType: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function (data) {
+                    console.log(data);
+                    console.log($('#container').text())
+                    simplemde.value('![]({{config('app.url')}}'+data+')');
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("上传出错了")
+                }
+            });
+        }
     </script>
 @endsection

@@ -21,3 +21,5 @@ Route::get( '/topics', function ( Request $request ) {
     $topics = \App\Topic::select( ['name', 'id'] )->where( 'name', 'like', '%'.$request->query( 'q' ).'%' )->get();
     return $topics;
 } );
+
+Route::post('/uploads/image', 'UploadsController@fileUpload')->name('uploads.image');
