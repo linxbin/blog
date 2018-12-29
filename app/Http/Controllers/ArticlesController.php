@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
 use App\Repositories\ArticlesRepository;
+use App\Topic;
 use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
@@ -13,7 +14,7 @@ class ArticlesController extends Controller
 
     public function __construct( ArticlesRepository $articlesRepository )
     {
-        $this->middleware( 'auth' )->except( ['index', 'show','newest','hottest','topic'] );
+        $this->middleware( 'auth' )->except( ['index', 'show', 'newest', 'hottest', 'topic'] );
         $this->articlesRepository = $articlesRepository;
     }
 
@@ -117,8 +118,7 @@ class ArticlesController extends Controller
             return redirect()->route( 'articles.show', $id );
         }
         $this->articlesRepository->delete( $id );
-        $articles = $this->articlesRepository->getArticlesFeed();
-        return redirect()->route( 'articles.index', ['articles' => $articles] );
+        return redirect()->route( 'articles.index' );
     }
 
     public function hidden( $id )
@@ -130,8 +130,7 @@ class ArticlesController extends Controller
         $article->update( [
             'is_hidden' => 'T',
         ] );
-        $articles = $this->articlesRepository->getArticlesFeed();
-        return redirect()->route( 'articles.index', ['articles' => $articles] );
+        return redirect()->route( 'articles.index' );
     }
 
     public function drafts()

@@ -46,7 +46,7 @@ class ArticlesRepository
 
     public function getArticlesFeed()
     {
-        return Article::published()->latest('updated_at')->paginate();
+        return Article::published()->with('topics')->latest('updated_at')->paginate();
     }
 
     public function getArticleNewestFeed()

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="btn-group mb-4 " role="group" aria-label="Basic example">
                     <a href="{{ route('articles.index') }}">
                         <button type="button"
@@ -62,10 +62,6 @@
                         {{ $articles->links() }}
                     </ul>
                 </nav>
-            </div>
-            <div class="col-md-4">
-                @include('layouts.userInfo')
-                @include('layouts.tags')
             </div>
         </div>
     </div>
