@@ -46,7 +46,7 @@ class ArticlesRepository
 
     public function getArticlesFeed()
     {
-        return Article::published()->latest('updated_at')->paginate();
+        return Article::published()->latest('create_at')->paginate();
     }
 
     public function ByTopicId($topicId)
@@ -59,6 +59,6 @@ class ArticlesRepository
 
     public function getArticlesHidden()
     {
-        return Article::hidden()->latest( 'updated_at' )->paginate();
+        return Article::hidden()->latest( 'create_at' )->paginate();
     }
 }
