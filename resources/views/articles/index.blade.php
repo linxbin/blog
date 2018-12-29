@@ -4,39 +4,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="btn-group mb-4 " role="group" aria-label="Basic example">
-                    <a href="{{ route('articles.index') }}">
-                        <button type="button"
-                                class="btn btn-secondary right-angle @if(Route::currentRouteName() == 'articles.index') active @endif">
-                            全部
-                        </button>
-                    </a>
-                    <a href="{{ route('articles.newest') }}">
-                        <button type="button"
-                                class="btn btn-secondary right-angle @if(Route::currentRouteName() == 'articles.newest') active @endif">
-                            按时间
-                        </button>
-                    </a>
-                    <a href="{{ route('articles.hottest') }}">
-                        <button type="button"
-                                class="btn btn-secondary right-angle @if(Route::currentRouteName() == 'articles.hottest') active @endif">
-                            按热度
-                        </button>
-                    </a>
-
-                </div>
-                @if(Auth::check())
-                    <div class="btn-group float-right" role="group" aria-label="Basic example">
-                        <a href="{{route('articles.drafts')}}">
-                            <button type="button" class="btn btn-primary">草稿箱</button>
-                        </a>
-                    </div>
-                    <div class="btn-group mr-2 float-right" role="group" aria-label="Basic example">
-                        <a href="{{route('articles.create')}}">
-                            <button type="button" class="btn btn-success">写文章</button>
-                        </a>
-                    </div>
-                @endif
                 @foreach( $articles as $article )
                     <div class="list-group mb-4">
                         <div class="list-group-item list-group-item-action flex-column align-items-start">

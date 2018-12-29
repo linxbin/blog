@@ -34,6 +34,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @if(Auth::check())
+                            <div class="btn-group m-1 float-right" role="group" aria-label="Basic example">
+                                <a href="{{route('articles.create')}}">
+                                    <button type="button" class="btn btn-success btn-sm">写文章</button>
+                                </a>
+                            </div>
+                            <div class="btn-group float-right m-1" role="group" aria-label="Basic example">
+                                <a href="{{route('articles.drafts')}}">
+                                    <button type="button" class="btn btn-primary btn-sm">草稿箱</button>
+                                </a>
+                            </div>
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

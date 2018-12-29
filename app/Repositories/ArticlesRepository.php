@@ -49,16 +49,6 @@ class ArticlesRepository
         return Article::published()->latest('updated_at')->paginate();
     }
 
-    public function getArticleNewestFeed()
-    {
-        return Article::published()->orderBy('created_at','desc')->paginate();
-    }
-
-    public function getArticleHottestFeed()
-    {
-        return Article::published()->orderBy('pv','desc')->paginate();
-    }
-
     public function ByTopicId($topicId)
     {
         return Article::whereHas('topics',function ($query) use ($topicId){

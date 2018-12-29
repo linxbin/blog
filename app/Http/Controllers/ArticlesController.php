@@ -139,18 +139,6 @@ class ArticlesController extends Controller
         return view( 'articles.index', ['articles' => $articles] );
     }
 
-    public function newest()
-    {
-        $articles = $this->articlesRepository->getArticleNewestFeed();
-        return view( 'articles.index', ['articles' => $articles] );
-    }
-
-    public function hottest()
-    {
-        $articles = $this->articlesRepository->getArticleHottestFeed();
-        return view( 'articles.index', ['articles' => $articles] );
-    }
-
     /**
      * @param $topicId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
