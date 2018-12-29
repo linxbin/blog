@@ -13,7 +13,7 @@ class ArticlesController extends Controller
 
     public function __construct( ArticlesRepository $articlesRepository )
     {
-        $this->middleware( 'auth' )->except( ['index', 'show'] );
+        $this->middleware( 'auth' )->except( ['index', 'show','newest','hottest','topic'] );
         $this->articlesRepository = $articlesRepository;
     }
 
