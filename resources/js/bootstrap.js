@@ -14,6 +14,7 @@ try {
     require('bootstrap');
     require('./select2.min');
     window.Simplemde = require('simplemde');
+    window.hljs = require('highlight.js');
 } catch (e) {}
 
 /**

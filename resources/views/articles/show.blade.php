@@ -37,3 +37,8 @@
         </div>
     </div>
 @endsection
+@section('js')
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+@endsection

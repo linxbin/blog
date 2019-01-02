@@ -17,6 +17,8 @@
 // markdown css
 @import "Markdown";
 
+@import "~highlight.js/styles/dracula.css";
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
