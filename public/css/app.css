@@ -721,10 +721,6 @@ a.topic:hover {
   text-decoration: none;
 }
 
-.card-body p img {
-  width: 100%;
-}
-
 a.topic {
   background: #eff6fa;
   padding: 1px 10px 0;
