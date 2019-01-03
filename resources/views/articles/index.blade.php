@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 @foreach( $articles as $article )
                     <div class="list-group mb-4">
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
@@ -29,6 +29,9 @@
                         {{ $articles->links() }}
                     </ul>
                 </nav>
+            </div>
+            <div class="col-md-3">
+                @include('layouts._tags')
             </div>
         </div>
     </div>

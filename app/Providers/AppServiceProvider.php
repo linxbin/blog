@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Topic;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Carbon::setLocale('zh');
+        view()->composer('layouts._tags', function ($view) {
+            $view->with('topics', Topic::articleCount());
+        });
     }
 
     /**

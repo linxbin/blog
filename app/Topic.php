@@ -32,4 +32,12 @@ class Topic extends Model
     {
         return $this->belongsToMany( Article::class )->withTimestamps();
     }
+
+    public static function articleCount()
+    {
+        return Topic::withCount(['articles' => function ($query) {
+            $query->where('is_hidden', 'F');
+        }])->get();
+
+    }
 }
