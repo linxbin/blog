@@ -12,7 +12,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    require('./select2.min');
+    require('./vendor/select2.min');
     window.Simplemde = require('simplemde');
     window.hljs = require('highlight.js');
 } catch (e) {}

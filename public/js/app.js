@@ -90656,7 +90656,7 @@ try {
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 
-  __webpack_require__(/*! ./select2.min */ "./resources/js/select2.min.js");
+  __webpack_require__(/*! ./vendor/select2.min */ "./resources/js/vendor/select2.min.js");
 
   window.Simplemde = __webpack_require__(/*! simplemde */ "./node_modules/simplemde/src/js/simplemde.js");
   window.hljs = __webpack_require__(/*! highlight.js */ "./node_modules/highlight.js/lib/index.js");
@@ -90770,10 +90770,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/select2.min.js":
-/*!*************************************!*\
-  !*** ./resources/js/select2.min.js ***!
-  \*************************************/
+/***/ "./resources/js/vendor/select2.min.js":
+/*!********************************************!*\
+  !*** ./resources/js/vendor/select2.min.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
