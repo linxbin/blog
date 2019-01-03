@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-9">
+            <div class="col-md-9 mb-2">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">{{$article->title}}</h3>
